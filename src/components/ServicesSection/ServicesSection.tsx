@@ -4,23 +4,24 @@ import { services } from '../../data/services'
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="relative py-14 md:py-20 lg:py-24">
+    <section id="services" className="section-luxe relative">
       <div className="container-hm">
         <Reveal>
-          <p className="eyebrow mb-4">05 — Qué hacemos</p>
-          <h2 className="display-huge text-4xl sm:text-5xl md:text-6xl mb-4">
-            Servicios
-          </h2>
-          <p className="mb-6 max-w-lg font-body text-smoke md:mb-8">
-            Parte de la estructura profesional que sostiene al ecosistema
-            HIGHER.
-          </p>
+          <div className="mb-16 grid gap-6 md:mb-24 md:grid-cols-12 md:items-end">
+            <div className="md:col-span-8">
+              <p className="eyebrow mb-4">05 — Qué hacemos</p>
+              <h2 className="section-title">Servicios</h2>
+            </div>
+            <p className="max-w-md font-body text-smoke md:col-span-4 md:pb-2">
+              Estrategia, producción y estructura para convertir una visión artística en una obra sostenible.
+            </p>
+          </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+        <div className="space-y-24 md:space-y-36">
           {services.map((service, i) => (
-            <Reveal key={service.id} delay={i * 0.12}>
-              <ServiceItem service={service} />
+            <Reveal key={service.id} delay={0.05}>
+              <ServiceItem service={service} reverse={i % 2 === 1} />
             </Reveal>
           ))}
         </div>

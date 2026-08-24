@@ -10,6 +10,11 @@ export interface Artist {
   role: string
   featured: boolean
   links: ArtistLinks
+  spotifyStats: {
+    monthlyListeners: number
+    topTrack: string
+    topTrackStreams: number
+  }
 }
 
 export type ReleaseType = 'Single' | 'EP' | 'Album'
@@ -29,7 +34,8 @@ export interface Release {
   produced: string
   date: string
   cover: string
-  audioSnippet: string
+  spotifyTrackId: string
+  highlightAt: string
   links: StreamingLinks
 }
 

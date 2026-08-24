@@ -7,9 +7,18 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
+    const onScroll = () => {
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
+      setScrolled(window.scrollY > 24)
+      document.documentElement.style.setProperty('--hm-scroll', String(window.scrollY / maxScroll))
+    }
+
+    onScroll()
     window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      document.documentElement.style.removeProperty('--hm-scroll')
+    }
   }, [])
 
   useEffect(() => {
@@ -22,13 +31,18 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-editorial ${
-        scrolled ? 'bg-void/80 backdrop-blur-md border-b border-white/5' : 'bg-transparent'
+        scrolled ? 'border-b border-white/[0.07] bg-void/[0.72] backdrop-blur-xl' : 'bg-transparent'
       }`}
     >
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 h-px origin-left bg-gradient-to-r from-transparent via-bone/60 to-[#8d7aa8]"
+        style={{ transform: 'scaleX(var(--hm-scroll, 0))' }}
+      />
       <div className="container-hm flex h-20 items-center justify-between">
         <a href="#top" className="flex items-center gap-3" aria-label="HIGHER MUSIK — inicio">
           <img
-            src="/images/branding/hm-mark.png"
+            src="/images/branding/hm-brand.png"
             alt="HIGHER MUSIK mark"
             className="h-9 w-auto"
           />
@@ -52,7 +66,7 @@ export default function Header() {
         <div className="flex items-center gap-4">
           <a
             href="#contact"
-            className="hidden md:inline-flex items-center gap-2 border border-white/15 px-5 py-2 text-xs uppercase tracking-widest2 font-mono text-bone hover:border-electric hover:text-electric hover:shadow-[0_0_18px_rgba(124,58,237,0.35)] transition-all duration-300"
+            className="ghost-action hidden !px-5 !py-2 md:inline-flex"
           >
             Contacto
           </a>

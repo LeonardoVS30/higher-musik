@@ -4,15 +4,23 @@ import { socialLinks } from '../../data/socialLinks'
 
 export default function SocialLinks() {
   return (
-    <section className="relative py-12 md:py-16">
-      <div className="container-hm flex flex-col items-center text-center">
+    <section id="social" className="section-luxe relative !py-20 md:!py-28">
+      <div className="container-hm">
         <Reveal>
-          <p className="eyebrow mb-8">07 — Seguinos</p>
+          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="eyebrow mb-4">07B — Señal abierta</p>
+              <h2 className="font-display text-[clamp(3rem,6vw,6.5rem)] uppercase leading-[0.9] tracking-tightest">
+                Encontranos afuera
+              </h2>
+            </div>
+            <p className="max-w-xs font-body text-smoke">Música, sesiones y proceso en tiempo real.</p>
+          </div>
         </Reveal>
 
-        <Reveal delay={0.1}>
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-8 sm:gap-x-10 md:gap-x-14">
-            {socialLinks.map((social) => {
+        <Reveal delay={0.08}>
+          <div className="grid grid-cols-2 border-y border-white/10 md:grid-cols-5">
+            {socialLinks.map((social, index) => {
               const Icon = socialIconMap[social.name]
               const active = Boolean(social.url)
               return (
@@ -21,16 +29,25 @@ export default function SocialLinks() {
                   href={social.url || undefined}
                   target={active ? '_blank' : undefined}
                   rel={active ? 'noreferrer' : undefined}
-                  aria-label={social.name}
                   aria-disabled={!active}
-                  title={social.name}
-                  className={`group relative flex h-16 w-16 items-center justify-center rounded-full border border-white/15 transition-all duration-300 ease-editorial sm:h-[4.5rem] sm:w-[4.5rem] ${
+                  className={`group flex min-h-48 flex-col justify-between border-b border-white/10 p-5 transition-colors duration-500 last:border-b-0 md:min-h-56 md:border-b-0 md:border-l md:first:border-l-0 ${
                     active
-                      ? 'text-bone hover:scale-[1.06] hover:border-electric hover:text-electric hover:shadow-[0_0_24px_rgba(124,58,237,0.35)]'
-                      : 'pointer-events-none text-smoke/40'
+                      ? 'hover:bg-white/[0.035]'
+                      : 'pointer-events-none opacity-[0.35]'
                   }`}
                 >
-                  {Icon && <Icon className="h-6 w-6 sm:h-7 sm:w-7" />}
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-[9px] tracking-widest2 text-bone/[0.35]">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    {Icon && <Icon className="h-5 w-5 text-bone/[0.55] transition-colors group-hover:text-bone" />}
+                  </div>
+                  <div>
+                    <p className="font-display text-2xl uppercase sm:text-3xl">{social.name}</p>
+                    <span className="mt-3 block font-mono text-[9px] uppercase tracking-widest2 text-bone/[0.35]">
+                      Abrir canal →
+                    </span>
+                  </div>
                 </a>
               )
             })}

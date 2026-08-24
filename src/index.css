@@ -16,6 +16,16 @@
   body {
     @apply bg-void text-bone font-body antialiased;
     font-feature-settings: 'ss01' on;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.035);
   }
 
   h1,
@@ -45,6 +55,46 @@
 
   .container-hm {
     @apply mx-auto w-full max-w-[1400px] px-6 md:px-10 lg:px-16;
+  }
+
+  .section-luxe {
+    padding-block: clamp(6rem, 10vw, 10rem);
+  }
+
+  .section-title {
+    @apply font-display uppercase leading-[0.86] tracking-tightest;
+    font-size: clamp(3.5rem, 8vw, 8.5rem);
+  }
+
+  .ghost-action {
+    @apply items-center border border-white/20 px-6 py-3 font-mono text-xs uppercase tracking-widest2 text-bone transition-all duration-300;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.015);
+  }
+
+  .ghost-action:hover {
+    border-color: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.055);
+  }
+
+  .glass-panel {
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.025);
+    backdrop-filter: blur(18px);
+  }
+
+  .media-frame {
+    border-radius: 12px;
+  }
+
+  .roster-transition {
+    background: linear-gradient(
+      to bottom,
+      transparent 0,
+      rgba(5, 5, 5, 0.82) 7svh,
+      #050505 14svh
+    );
   }
 
   .eyebrow {
@@ -90,6 +140,39 @@
     transform: scaleX(1);
     transform-origin: left;
   }
+
+  .experience-shell {
+    overflow: clip;
+  }
+
+  .experience-shell main > section {
+    isolation: isolate;
+    scroll-margin-top: 5rem;
+  }
+
+  .experience-shell main > section:not(#top):not(#artists)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: clamp(1.5rem, 5vw, 4rem);
+    right: clamp(1.5rem, 5vw, 4rem);
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  }
+
+  .premium-card {
+    transform: perspective(1200px) translateZ(0);
+    transform-style: preserve-3d;
+    transition:
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .premium-card:hover {
+    transform: perspective(1200px) translateY(-5px) rotateX(0.8deg) translateZ(8px);
+    filter: drop-shadow(0 20px 42px rgba(0, 0, 0, 0.34));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -100,5 +183,10 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .premium-card,
+  .premium-card:hover {
+    transform: none;
   }
 }

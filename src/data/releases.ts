@@ -1,16 +1,18 @@
 import type { Release } from '../types'
 
 export const latestRelease: Release = {
-  id: 'tas-lejoh',
-  artist: 'LAS21ALMAS 🇵🇷',
-  title: 'TAS LEJOH',
+  id: 'altoke',
+  artist: 'THOMSON, DOLYFLACKKO. & GONZU',
+  title: 'ALTOKE',
   type: 'Single',
-  produced: 'Producido por MATIAS ENVY & MXRENO',
+  produced: 'Producido por GONZY & MATIAS ENVY',
   date: '2026',
-  cover: '/images/releases/tas-lejoh.jpg',
-  audioSnippet: '/audio/release-snippet.mp3',
+  cover: 'https://i.scdn.co/image/ab67616d0000e1a3a369d02b95eecb9807145790',
+  spotifyTrackId: '2duOqZH1nUbdMpu63U0wDn',
+  highlightAt: '01:00',
   links: {
-    spotify: '',
+    spotify:
+      'https://open.spotify.com/intl-es/track/2duOqZH1nUbdMpu63U0wDn?si=ed098b54ba624d26',
     appleMusic: '',
     youtube: '',
     soundcloud: '',

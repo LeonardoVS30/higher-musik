@@ -1,60 +1,63 @@
-import { useRef } from 'react'
-import { motion } from 'framer-motion'
 import Reveal from '../shared/Reveal'
 import { gallery } from '../../data/gallery'
 
 const aspectClass: Record<string, string> = {
-  portrait: 'aspect-[3/4] w-[46vw] sm:w-[28vw] lg:w-[16vw]',
-  landscape: 'aspect-[4/3] w-[60vw] sm:w-[36vw] lg:w-[22vw]',
-  square: 'aspect-square w-[46vw] sm:w-[28vw] lg:w-[16vw]',
+  portrait: 'aspect-[3/4]',
+  landscape: 'aspect-[4/3]',
+  square: 'aspect-square',
 }
 
-export default function VisualGallery() {
-  const trackRef = useRef<HTMLDivElement>(null)
+const layout = [
+  'md:col-span-5 md:row-span-3',
+  'md:col-span-7 md:row-span-2',
+  'md:col-span-3 md:row-span-2',
+  'md:col-span-4 md:row-span-3',
+  'md:col-span-5 md:row-span-2',
+  'md:col-span-3 md:row-span-2',
+]
 
+export default function VisualGallery() {
   return (
-    <section className="relative py-8 md:py-12">
+    <section id="gallery" className="section-luxe relative overflow-hidden">
       <div className="container-hm">
         <Reveal>
-          <p className="eyebrow mb-3">04 — Universo visual</p>
-          <h2 className="display-huge text-3xl sm:text-4xl md:text-5xl mb-6">
-            Adentro del sello
-          </h2>
-        </Reveal>
-      </div>
-
-      <div className="overflow-hidden pl-6 md:pl-10 lg:pl-16">
-        <motion.div
-          ref={trackRef}
-          className="flex cursor-grab gap-4 pb-4 active:cursor-grabbing"
-          drag="x"
-          dragConstraints={{ left: -1600, right: 0 }}
-          dragElastic={0.08}
-        >
-          {gallery.map((item) => (
-            <div
-              key={item.id}
-              className={`group relative flex-shrink-0 overflow-hidden bg-ink ${aspectClass[item.aspect]}`}
-            >
-              <img
-                src={item.image}
-                alt={item.caption ?? 'Universo visual HIGHER MUSIK'}
-                loading="lazy"
-                draggable={false}
-                className="h-full w-full select-none object-cover contrast-100 transition-all duration-700 ease-editorial group-hover:scale-[1.03] group-hover:contrast-110"
-                onError={(e) => {
-                  ;(e.currentTarget as HTMLImageElement).style.opacity = '0'
-                }}
-              />
-              <div className="pointer-events-none absolute inset-0 bg-glow-violet opacity-0 transition-opacity duration-500 group-hover:opacity-20" />
-              {item.caption && (
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-void/80 to-transparent p-4 opacity-0 transition-opacity duration-400 group-hover:opacity-100">
-                  <p className="eyebrow">{item.caption}</p>
-                </div>
-              )}
+          <div className="mb-12 grid gap-6 md:mb-16 md:grid-cols-12 md:items-end">
+            <div className="md:col-span-8">
+              <p className="eyebrow mb-4">04 — Universo visual</p>
+              <h2 className="section-title">Adentro del sello</h2>
             </div>
+            <p className="max-w-sm font-body text-smoke md:col-span-4 md:pb-2">
+              El proceso, las noches y los espacios donde el sonido empieza a tomar forma.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="grid grid-cols-1 gap-5 md:grid-flow-dense md:grid-cols-12 md:auto-rows-[12vw] md:gap-6">
+          {gallery.map((item, index) => (
+            <Reveal key={item.id} delay={index * 0.055} className={layout[index]}>
+              <figure
+                className={`premium-card media-frame group relative h-full overflow-hidden border border-white/[0.08] bg-ink md:aspect-auto ${aspectClass[item.aspect]}`}
+              >
+                <img
+                  src={item.image}
+                  alt={item.caption ?? 'Universo visual HIGHER MUSIK'}
+                  loading="lazy"
+                  className="h-full w-full object-cover grayscale-[24%] transition-all duration-1000 ease-editorial group-hover:scale-[1.025] group-hover:grayscale-0"
+                  onError={(event) => {
+                    ;(event.currentTarget as HTMLImageElement).style.opacity = '0'
+                  }}
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/75 via-transparent to-white/[0.025]" />
+                <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5">
+                  <p className="font-body text-sm text-bone/80">{item.caption}</p>
+                  <span className="font-mono text-[9px] tracking-widest2 text-bone/40">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                </figcaption>
+              </figure>
+            </Reveal>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

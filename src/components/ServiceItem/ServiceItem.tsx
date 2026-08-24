@@ -2,35 +2,51 @@ import type { Service } from '../../types'
 
 interface ServiceItemProps {
   service: Service
+  reverse?: boolean
 }
 
-export default function ServiceItem({ service }: ServiceItemProps) {
+export default function ServiceItem({ service, reverse = false }: ServiceItemProps) {
   return (
-    <div className="group flex flex-col">
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-ink">
+    <article className="group grid gap-8 border-t border-white/[0.12] pt-6 md:grid-cols-12 md:items-center md:gap-10 lg:gap-16">
+      <div
+        className={`media-frame relative aspect-[16/10] overflow-hidden border border-white/[0.08] bg-ink md:col-span-7 ${
+          reverse ? 'md:order-2' : ''
+        }`}
+      >
         <img
           src={service.image}
           alt=""
           aria-hidden="true"
           loading="lazy"
-          className="h-full w-full object-cover brightness-90 transition-all duration-700 ease-editorial group-hover:scale-[1.03] group-hover:brightness-100"
+          className="h-full w-full object-cover grayscale-[32%] transition-all duration-1000 ease-editorial group-hover:scale-[1.025] group-hover:grayscale-0"
           onError={(e) => {
             ;(e.currentTarget as HTMLImageElement).style.opacity = '0'
           }}
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/60 via-transparent to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/[0.45] via-transparent to-white/[0.025]" />
       </div>
 
-      <div className="mt-5 flex items-baseline gap-4 transition-transform duration-400 ease-editorial group-hover:-translate-y-1">
-        <span className="font-mono text-sm text-smoke">{service.number}</span>
-        <h3 className="font-display uppercase text-xl leading-none transition-colors duration-300 group-hover:text-electric sm:text-2xl">
+      <div className={`relative md:col-span-5 ${reverse ? 'md:order-1' : ''}`}>
+        <span
+          aria-hidden="true"
+          className="absolute -top-16 right-0 font-display text-[clamp(7rem,14vw,13rem)] leading-none text-white/[0.035]"
+        >
+          {service.number}
+        </span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40">
+          Capítulo {service.number}
+        </span>
+        <h3 className="mt-7 max-w-2xl font-display text-[clamp(2.8rem,5vw,6rem)] uppercase leading-[0.88] tracking-tightest">
           {service.title}
         </h3>
+        <p className="mt-7 max-w-xl font-body leading-relaxed text-smoke">
+          {service.description}
+        </p>
+        <div className="mt-10 flex items-center gap-4 font-mono text-[9px] uppercase tracking-widest2 text-bone/[0.35]">
+          <span className="h-px w-10 bg-bone/[0.35]" />
+          Higher Musik Direction
+        </div>
       </div>
-
-      <p className="mt-3 font-body text-sm leading-relaxed text-smoke opacity-90 transition-opacity duration-300 group-hover:opacity-100">
-        {service.description}
-      </p>
-    </div>
+    </article>
   )
 }

@@ -11,12 +11,14 @@ import SocialLinks from './components/SocialLinks/SocialLinks'
 import PlaylistSection from './components/PlaylistSection/PlaylistSection'
 import ContactCTA from './components/ContactCTA/ContactCTA'
 import Footer from './components/Footer/Footer'
+import ChapterRail from './components/Experience/ChapterRail'
 
 function App() {
   return (
-    <div className="relative min-h-screen bg-void">
+    <div className="experience-shell relative min-h-screen bg-void">
       <Header />
-      <main>
+      <ChapterRail />
+      <main className="relative z-10">
         <Hero />
         <ArtistsSection />
         <LatestRelease />
@@ -29,7 +31,9 @@ function App() {
         <PlaylistSection />
         <ContactCTA />
       </main>
-      <Footer />
+      <div className="relative z-10">
+        <Footer />
+      </div>
     </div>
   )
 }

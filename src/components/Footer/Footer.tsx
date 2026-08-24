@@ -2,10 +2,10 @@ import { siteConfig } from '../../data/site'
 
 export default function Footer() {
   return (
-    <footer id="contact" className="relative border-t border-white/10 py-12">
+    <footer id="contact" className="relative border-t border-white/[0.08] py-12">
       <div className="container-hm flex flex-col items-center gap-8">
         <img
-          src="/images/branding/hm-mark.png"
+          src="/images/branding/hm-brand.png"
           alt="HIGHER MUSIK"
           className="h-8 w-auto opacity-90"
         />
