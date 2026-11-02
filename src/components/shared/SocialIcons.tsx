@@ -75,10 +75,27 @@ export function YouTubeIcon({ className }: IconProps) {
   )
 }
 
+export function DiscordIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M7.2 6.7A15.5 15.5 0 0 1 12 6c1.7 0 3.3.2 4.8.7 1.3 1.8 2.1 4.2 2.3 6.8-1.6 1.2-3.1 1.9-4.7 2.3l-1.1-1.5m-2.6 0-1.1 1.5c-1.6-.4-3.1-1.1-4.7-2.3.2-2.6 1-5 2.3-6.8Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="9.5" cy="11.8" r="1" fill="currentColor" />
+      <circle cx="14.5" cy="11.8" r="1" fill="currentColor" />
+    </svg>
+  )
+}
+
 export const socialIconMap: Record<string, (props: IconProps) => ReactElement> = {
   Instagram: InstagramIcon,
   TikTok: TikTokIcon,
   Kick: KickIcon,
   Spotify: SpotifyIcon,
   YouTube: YouTubeIcon,
+  Discord: DiscordIcon,
 }

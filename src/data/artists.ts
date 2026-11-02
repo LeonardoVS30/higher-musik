@@ -1,6 +1,6 @@
 import type { Artist } from '../types'
 
-// Roster real de HIGHER MUSIK con fotografías y métricas públicas de Spotify.
+// Selección editorial; no implica representación. Métricas históricas sin verificar, no publicadas.
 export const artists: Artist[] = [
   {
     id: 'anubiis',

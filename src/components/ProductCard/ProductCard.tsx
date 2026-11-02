@@ -26,7 +26,7 @@ export default function ProductCard({ product, featured = false }: ProductCardPr
             Featured · {product.category}
           </span>
           <span className="font-mono text-sm text-bone">
-            ${product.price} {product.currency}
+            {buyable ? `${product.price} ${product.currency}` : ''}
           </span>
         </div>
         <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 lg:p-10">
@@ -87,7 +87,7 @@ export default function ProductCard({ product, featured = false }: ProductCardPr
             </h3>
           </div>
           <span className="whitespace-nowrap font-mono text-xs text-bone">
-            ${product.price}
+            {buyable ? `${product.price} ${product.currency}` : ''}
           </span>
         </div>
         <p className="mt-4 line-clamp-2 font-body text-sm leading-relaxed text-smoke">

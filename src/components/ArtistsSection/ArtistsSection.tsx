@@ -48,17 +48,17 @@ export default function ArtistsSection() {
       style={{ height: scrollDriven ? `calc(100svh + ${travel}px)` : 'auto' }}
       className="roster-transition relative z-20 -mt-[65svh]"
     >
-      <div className="pt-[14svh] md:sticky md:top-0 md:flex md:h-[100svh] md:flex-col md:justify-center md:overflow-hidden md:pt-20">
+      <div className={`pt-[14svh] md:pt-20 ${scrollDriven ? 'md:sticky md:top-0 md:flex md:h-[100svh] md:flex-col md:justify-center md:overflow-hidden' : ''}`} >
         <div className="container-hm relative z-10">
           <Reveal>
             <div className="mb-10 flex flex-col gap-5 md:mb-8 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="eyebrow mb-4">01 — Roster</p>
-                <h2 className="section-title">Roster</h2>
+                <p className="eyebrow mb-4">01 — Descubrimientos</p>
+                <h2 className="section-title">Artistas</h2>
               </div>
               <div className="flex max-w-sm items-end gap-6 md:pb-2">
                 <p className="font-body text-smoke">
-                  Una constelación de artistas construyendo el próximo sonido.
+                  Selección para descubrir música urbana. Su inclusión no implica representación por Higher Musik.
                 </p>
                 <span className="hidden font-mono text-[10px] uppercase tracking-widest2 text-bone/[0.35] md:block">
                   Scroll →
@@ -68,11 +68,11 @@ export default function ArtistsSection() {
           </Reveal>
         </div>
 
-        <div className="no-scrollbar overflow-x-auto md:overflow-visible">
+        <div tabIndex={scrollDriven ? undefined : 0} role="region" aria-label="Explorar artistas" className={scrollDriven ? 'md:overflow-visible' : 'overflow-x-auto'}>
           <motion.div
             ref={trackRef}
             style={scrollDriven ? { x } : undefined}
-            className="flex w-max snap-x snap-proximity gap-5 pb-12 pl-6 pr-[10vw] md:gap-7 md:pl-10 lg:gap-8 lg:pl-16"
+            className="flex w-max gap-5 pb-12 pl-6 pr-[10vw] md:gap-7 md:pl-10 lg:gap-8 lg:pl-16"
           >
             {artists.map((artist, index) => (
               <div key={artist.id} className="flex-shrink-0 snap-center">

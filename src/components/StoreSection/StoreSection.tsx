@@ -9,11 +9,11 @@ export default function StoreSection() {
         <Reveal>
           <div className="grid gap-6 md:grid-cols-12 md:items-end">
             <div className="md:col-span-8">
-              <p className="eyebrow mb-4">06 — Higher Store</p>
+              <p className="eyebrow mb-4">05 — Higher Store</p>
               <h2 className="section-title">Higher Store</h2>
             </div>
             <p className="max-w-md font-body text-smoke md:col-span-4 md:pb-2">
-              Herramientas sonoras diseñadas dentro del universo Higher.
+              Catálogo en preparación. Los productos e imágenes son provisionales; anunciaremos los detalles y precios al lanzamiento.
             </p>
           </div>
         </Reveal>

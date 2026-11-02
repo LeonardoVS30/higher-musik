@@ -71,7 +71,7 @@ export default function LatestRelease() {
             className="md:col-span-6 lg:col-span-7 lg:pl-8"
           >
             <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.34em] text-bone/40">
-              New release · Now playing
+              Nuevo lanzamiento · En reproducción
             </p>
             <h2 className="display-huge text-[clamp(4rem,9vw,10rem)]">
               {latestRelease.title}

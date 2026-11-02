@@ -1,21 +1,27 @@
+import { lazy, Suspense } from 'react'
+
 import Header from './components/Header/Header'
 import Hero from './components/Hero/Hero'
 import ArtistsSection from './components/ArtistsSection/ArtistsSection'
 import LatestRelease from './components/LatestRelease/LatestRelease'
 import AboutSection from './components/AboutSection/AboutSection'
-import VisualGallery from './components/VisualGallery/VisualGallery'
 import ServicesSection from './components/ServicesSection/ServicesSection'
 import StoreSection from './components/StoreSection/StoreSection'
 import DiscordBanner from './components/DiscordBanner/DiscordBanner'
-import SocialLinks from './components/SocialLinks/SocialLinks'
-import PlaylistSection from './components/PlaylistSection/PlaylistSection'
 import ContactCTA from './components/ContactCTA/ContactCTA'
 import Footer from './components/Footer/Footer'
 import ChapterRail from './components/Experience/ChapterRail'
+import DioramasScroll from './components/Experience/DioramasScroll'
+
+const DioramasWorld = lazy(() => import('./components/Experience/DioramasWorld'))
 
 function App() {
   return (
     <div className="experience-shell relative min-h-screen bg-void">
+      <Suspense fallback={null}>
+        <DioramasWorld />
+      </Suspense>
+      <DioramasScroll />
       <Header />
       <ChapterRail />
       <main className="relative z-10">
@@ -23,12 +29,9 @@ function App() {
         <ArtistsSection />
         <LatestRelease />
         <AboutSection />
-        <VisualGallery />
         <ServicesSection />
         <StoreSection />
         <DiscordBanner />
-        <SocialLinks />
-        <PlaylistSection />
         <ContactCTA />
       </main>
       <div className="relative z-10">

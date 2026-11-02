@@ -1,6 +1,5 @@
 import type { Artist } from '../../types'
 
-const formatNumber = new Intl.NumberFormat('es-AR').format
 
 interface ArtistCardProps {
   artist: Artist
@@ -26,23 +25,7 @@ export default function ArtistCard({ artist, index }: ArtistCardProps) {
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/[0.55] via-transparent to-white/[0.025]" />
         <div className="absolute inset-0 z-20 flex flex-col justify-end bg-gradient-to-t from-void via-void/[0.88] to-transparent p-5 opacity-100 transition-all duration-500 ease-editorial md:translate-y-3 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 md:group-focus-within:translate-y-0 md:group-focus-within:opacity-100">
-          <p className="font-mono text-[9px] uppercase tracking-widest2 text-bone/[0.55]">
-            Spotify · Oyentes mensuales
-          </p>
-          <p className="mt-2 font-display text-4xl leading-none text-bone sm:text-5xl">
-            {formatNumber(artist.spotifyStats.monthlyListeners)}
-          </p>
-          <div className="mt-5 border-t border-white/15 pt-4">
-            <p className="font-mono text-[9px] uppercase tracking-widest2 text-bone/[0.45]">
-              Tema popular
-            </p>
-            <p className="mt-2 line-clamp-1 font-body text-sm text-bone">
-              {artist.spotifyStats.topTrack}
-            </p>
-            <p className="mt-1 font-mono text-[9px] tracking-widest2 text-smoke">
-              {formatNumber(artist.spotifyStats.topTrackStreams)} reproducciones
-            </p>
-          </div>
+          <p className="font-body text-sm text-bone/75">Descubrí su música y consultá sus cifras actuales en Spotify.</p>
           <a
             href={artist.links.spotify}
             target="_blank"

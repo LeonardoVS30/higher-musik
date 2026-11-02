@@ -1,4 +1,4 @@
-import { siteConfig } from '../../data/site'
+import { contactEmailUrl, siteConfig } from '../../data/site'
 
 export default function Footer() {
   return (
@@ -12,11 +12,11 @@ export default function Footer() {
 
         <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left w-full">
           <p className="font-mono text-xs text-smoke">
-            © 2026 HIGHER MUSIK. Todos los derechos reservados. (Buenos Aires, Argentina)
+            © 2026 HIGHER MUSIK. Todos los derechos reservados.
           </p>
 
           <a
-            href={`mailto:${siteConfig.email}`}
+            href={contactEmailUrl('Contacto — Higher Musik')}
             className="link-underline font-mono text-xs text-bone/80 hover:text-bone transition-colors"
           >
             {siteConfig.email}

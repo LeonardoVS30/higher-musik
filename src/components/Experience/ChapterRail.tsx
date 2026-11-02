@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react'
 
 const chapters = [
-  { id: 'artists', number: '01', label: 'Roster' },
+  { id: 'artists', number: '01', label: 'Artistas' },
   { id: 'release', number: '02', label: 'Release' },
   { id: 'about', number: '03', label: 'Higher' },
-  { id: 'gallery', number: '04', label: 'Archivo' },
-  { id: 'services', number: '05', label: 'Servicios' },
-  { id: 'store', number: '06', label: 'Store' },
-  { id: 'community', number: '07', label: 'Comunidad' },
-  { id: 'playlist', number: '08', label: 'Selects' },
-  { id: 'contact-cta', number: '09', label: 'Contacto' },
+  { id: 'services', number: '04', label: 'Servicios' },
+  { id: 'store', number: '05', label: 'Store' },
+  { id: 'community', number: '06', label: 'Comunidad' },
+  { id: 'contact-cta', number: '07', label: 'Contacto' },
 ]
 
 export default function ChapterRail() {

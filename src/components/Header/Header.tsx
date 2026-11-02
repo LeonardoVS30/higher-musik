@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { siteConfig } from '../../data/site'
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     const onScroll = () => {
@@ -22,9 +23,23 @@ export default function Header() {
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    if (!menuOpen) return
+    const previousOverflow = document.body.style.overflow
+    const dialog = dialogRef.current!
+    const menuButton = menuButtonRef.current
+    dialog.showModal()
+    document.body.style.overflow = 'hidden'
+    const desktop = window.matchMedia('(min-width: 768px)')
+    const closeOnDesktop = () => {
+      if (desktop.matches) setMenuOpen(false)
+    }
+    desktop.addEventListener('change', closeOnDesktop)
+    closeOnDesktop()
     return () => {
-      document.body.style.overflow = ''
+      desktop.removeEventListener('change', closeOnDesktop)
+      dialog.close()
+      document.body.style.overflow = previousOverflow
+      menuButton?.focus()
     }
   }, [menuOpen])
 
@@ -72,9 +87,11 @@ export default function Header() {
           </a>
 
           <button
+            ref={menuButtonRef}
             className="md:hidden flex flex-col gap-1.5 p-2"
-            aria-label="Abrir menú"
+            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
             onClick={() => setMenuOpen((v) => !v)}
           >
             <span
@@ -91,43 +108,36 @@ export default function Header() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
-            className="md:hidden fixed inset-0 top-20 bg-void/98 backdrop-blur-sm"
-          >
-            <nav className="container-hm flex flex-col gap-8 pt-12">
-              {siteConfig.nav.map((item, i) => (
-                <motion.a
+      <dialog
+        ref={dialogRef}
+        id="mobile-menu"
+        aria-label="Menú de navegación"
+        onCancel={() => setMenuOpen(false)}
+        className="fixed inset-0 m-0 h-[100dvh] max-h-none w-full max-w-none overflow-y-auto border-0 bg-void p-0 text-bone backdrop:bg-void"
+      >
+            <div className="container-hm flex h-20 items-center justify-end">
+              <button onClick={() => setMenuOpen(false)} className="ghost-action inline-flex">Cerrar menú</button>
+            </div>
+            <nav className="container-hm flex flex-col gap-8 py-8">
+              {siteConfig.nav.map((item) => (
+                <a
                   key={item.href}
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: i * 0.05 }}
                   className="font-display uppercase text-4xl text-bone"
                 >
                   {item.label}
-                </motion.a>
+                </a>
               ))}
-              <motion.a
+              <a
                 href="#contact"
                 onClick={() => setMenuOpen(false)}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: siteConfig.nav.length * 0.05 }}
                 className="eyebrow mt-4 inline-flex w-fit border border-white/15 px-5 py-3 text-electric"
               >
                 Contacto
-              </motion.a>
+              </a>
             </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      </dialog>
     </header>
   )
 }
